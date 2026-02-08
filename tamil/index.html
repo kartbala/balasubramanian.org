@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tamil Command Quiz</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <p class="brand">Tamil Quiz</p>
+        <div class="top-actions">
+          <button
+            id="open-shortcuts-btn"
+            type="button"
+            class="ghost-btn"
+            aria-keyshortcuts="Shift+/"
+            title="Shortcut: ?"
+          >
+            Shortcuts (?)
+          </button>
+          <a
+            class="link-btn"
+            href="docs.html"
+            target="_blank"
+            rel="noopener"
+            title="Shortcut: H"
+            >Help (H)</a
+          >
+          <button id="open-settings-btn" type="button" class="ghost-btn" aria-keyshortcuts="S">
+            Settings (S)
+          </button>
+        </div>
+      </header>
+
+      <section class="quiz-card" aria-live="polite">
+        <button
+          id="open-settings-fab-btn"
+          type="button"
+          class="settings-fab hidden"
+          aria-label="Open settings"
+          aria-keyshortcuts="S"
+          title="Settings (S)"
+        >
+          ⚙
+        </button>
+
+        <div class="meta-row">
+          <p id="progress-text">Question 1</p>
+          <p id="score-text" class="score">Score: 0/0</p>
+        </div>
+
+        <h1 id="english-prompt">Loading...</h1>
+        <p id="question-meta" class="subtle"></p>
+
+        <div class="focus-toolbar">
+          <p id="respect-indicator" class="respect-indicator">With respect</p>
+          <button
+            id="play-audio-btn"
+            type="button"
+            class="audio-btn"
+            disabled
+            aria-keyshortcuts="L"
+            title="Shortcut: L"
+          >
+            Listen (L)
+          </button>
+          <div class="actions">
+            <button id="back-btn" type="button" aria-keyshortcuts="B" title="Shortcut: B">
+              Back (B)
+            </button>
+            <button id="reveal-btn" type="button" aria-keyshortcuts="R" title="Shortcut: R">
+              Reveal (R)
+            </button>
+            <button id="next-btn" type="button" aria-keyshortcuts="N Enter" title="Shortcut: N">
+              Next (N)
+            </button>
+          </div>
+        </div>
+
+        <p id="audio-hint" class="subtle">No audio available yet.</p>
+
+        <div id="options" class="options" role="list"></div>
+        <p id="feedback" class="feedback"></p>
+      </section>
+
+      <section id="recording-mode-card" class="recording-mode-card hidden" aria-live="polite">
+        <div class="recording-mode-head">
+          <p id="recording-progress" class="subtle compact">Phrase 1 / 1</p>
+          <p id="recording-coverage" class="subtle compact">Recorded 0 / 0</p>
+        </div>
+
+        <h1 id="recording-mode-english">Teacher recording mode</h1>
+        <p id="recording-mode-tags" class="subtle"></p>
+        <p id="recording-mode-tamil" class="recording-mode-tamil"></p>
+        <p id="recording-mode-roman" class="recording-mode-roman"></p>
+        <p id="recording-clip-state" class="subtle compact"></p>
+
+        <div class="recording-mode-actions">
+          <button id="recording-prev-btn" type="button" title="Shortcut: Left Arrow">
+            Prev (←)
+          </button>
+          <button id="recording-next-btn" type="button" title="Shortcut: Right Arrow">
+            Next (→)
+          </button>
+        </div>
+
+        <div class="recording-mode-actions">
+          <button
+            id="recording-mode-record-btn"
+            type="button"
+            class="audio-btn"
+            title="Shortcut: V"
+          >
+            Record (V)
+          </button>
+          <button id="recording-mode-stop-btn" type="button" disabled title="Shortcut: X">
+            Stop (X)
+          </button>
+          <button id="recording-mode-play-btn" type="button" disabled title="Shortcut: K">
+            Play (K)
+          </button>
+          <button id="recording-mode-delete-btn" type="button" disabled title="Shortcut: Delete">
+            Delete
+          </button>
+        </div>
+
+        <p id="recording-inline-status" class="subtle"></p>
+      </section>
+    </main>
+
+    <div id="shortcut-backdrop" class="backdrop shortcut-backdrop hidden"></div>
+    <aside
+      id="shortcut-overlay"
+      class="shortcut-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="shortcut-title"
+    >
+      <div class="shortcut-head">
+        <h2 id="shortcut-title">Keyboard Shortcuts</h2>
+        <button id="close-shortcuts-btn" type="button" class="ghost-btn" title="Shortcut: ? or Esc">
+          Close
+        </button>
+      </div>
+      <div class="shortcut-grid">
+        <p><kbd>L</kbd> Listen</p>
+        <p><kbd>R</kbd> Reveal</p>
+        <p><kbd>B</kbd> Back</p>
+        <p><kbd>N</kbd> Next</p>
+        <p><kbd>S</kbd> Open settings</p>
+        <p><kbd>Esc</kbd> Close settings</p>
+        <p><kbd>H</kbd> Open docs help</p>
+        <p><kbd>?</kbd> Toggle shortcut sheet</p>
+        <p><kbd>D</kbd> Toggle display mode</p>
+        <p><kbd>M</kbd> Cycle respect mode</p>
+        <p><kbd>P</kbd> Cycle polarity mode</p>
+        <p><kbd>F</kbd> Cycle fallback mode</p>
+        <p><kbd>V</kbd> Start/stop recording (teacher mode)</p>
+        <p><kbd>K</kbd> Play saved clip (teacher mode)</p>
+        <p><kbd>X</kbd> Stop recording (teacher mode)</p>
+        <p><kbd>←</kbd> <kbd>→</kbd> Prev/next phrase (teacher mode)</p>
+        <p><kbd>1</kbd>-<kbd>4</kbd> Pick option</p>
+        <p><kbd>Arrow keys</kbd> Move option focus</p>
+        <p><kbd>Enter</kbd> Submit / next</p>
+      </div>
+      <p class="subtle compact">Inside Settings: <kbd>V</kbd> record start/stop, <kbd>K</kbd> play selected clip, <kbd>Cmd/Ctrl + S</kbd> save cloud settings.</p>
+    </aside>
+
+    <div id="settings-backdrop" class="backdrop hidden"></div>
+    <aside
+      id="settings-drawer"
+      class="settings hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settings-title"
+    >
+      <div class="settings-head">
+        <h2 id="settings-title">Settings</h2>
+        <div class="top-actions">
+          <a
+            class="link-btn"
+            href="docs.html"
+            target="_blank"
+            rel="noopener"
+            title="Shortcut: H"
+            >Help (H)</a
+          >
+          <button id="close-settings-btn" type="button" class="ghost-btn" title="Shortcut: Esc">
+            Close (Esc)
+          </button>
+        </div>
+      </div>
+
+      <section class="settings-group">
+        <h3>Display</h3>
+        <label class="field">
+          <span>UI mode</span>
+          <select id="ui-mode-select">
+            <option value="standard">Standard (default)</option>
+            <option value="low_vision">Low vision focus mode</option>
+            <option value="teacher_recording">Teacher recording mode</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="settings-group">
+        <h3>Quiz Mode</h3>
+        <label class="field">
+          <span>Respect mode</span>
+          <select id="respect-mode-select">
+            <option value="respectful">With respect (default)</option>
+            <option value="casual">Without respect</option>
+            <option value="mixed">Both mixed random</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Phrase polarity</span>
+          <select id="polarity-mode-select">
+            <option value="mixed">Both positive + negative</option>
+            <option value="positive">Positive only</option>
+            <option value="negative">Negative only</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="settings-group">
+        <h3>Audio Fallback</h3>
+        <label class="field">
+          <span>Fallback mode when real clip is missing</span>
+          <select id="tts-mode-select">
+            <option value="none">Real clips only</option>
+            <option value="mac_basic">Mac Basic TTS</option>
+            <option value="cloud_plus">Upgraded Cloud TTS (OpenAI)</option>
+          </select>
+        </label>
+
+        <p class="subtle compact hidden" id="mac-tts-hint">
+          Uses built-in browser/macOS voice.
+        </p>
+
+        <div class="cloud-settings hidden" id="cloud-settings">
+          <label class="field">
+            <span>OpenAI API key</span>
+            <input
+              id="openai-key-input"
+              type="password"
+              autocomplete="off"
+              placeholder="sk-..."
+            />
+          </label>
+
+          <div class="two-col">
+            <label class="field">
+              <span>Model</span>
+              <input id="tts-model-input" type="text" value="gpt-4o-mini-tts" />
+            </label>
+            <label class="field">
+              <span>Voice</span>
+              <input id="tts-voice-input" type="text" value="alloy" />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Accent/style instruction</span>
+            <textarea id="tts-instructions-input" rows="3">Speak Tamil in natural Kongu Tamil (Erode side) accent. Keep tone warm, clear, and child-friendly.</textarea>
+          </label>
+
+          <button id="save-cloud-config-btn" type="button">Save Cloud Audio Settings</button>
+        </div>
+
+        <p id="tts-status" class="subtle compact"></p>
+      </section>
+
+      <section class="settings-group">
+        <h3>Real Voice Library</h3>
+        <label class="field">
+          <span>Phrase</span>
+          <select id="command-select"></select>
+        </label>
+
+        <div class="phrase-preview">
+          <p id="preview-english"></p>
+          <p id="preview-tamil" class="tamil"></p>
+        </div>
+
+        <div class="record-actions">
+          <button id="start-record-btn" type="button">Record</button>
+          <button id="stop-record-btn" type="button" disabled>Stop</button>
+          <button id="play-record-btn" type="button" disabled>Play</button>
+          <button id="delete-record-btn" type="button" disabled>Delete</button>
+        </div>
+
+        <label class="field">
+          <span>Upload clip</span>
+          <input id="upload-input" type="file" accept="audio/*" />
+        </label>
+
+        <p id="record-status" class="subtle"></p>
+
+        <details class="coverage">
+          <summary>Clip coverage</summary>
+          <ul id="coverage-list" class="coverage-list"></ul>
+        </details>
+      </section>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>

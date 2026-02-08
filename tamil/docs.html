@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tamil Quiz Help</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+        background: #f6f7f9;
+        color: #1f252d;
+      }
+      main {
+        width: min(760px, 92vw);
+        margin: 1.6rem auto 2rem;
+        background: #fff;
+        border: 1px solid #dbe2ea;
+        border-radius: 14px;
+        padding: 1rem 1.05rem;
+      }
+      h1,
+      h2 {
+        margin: 0 0 0.6rem;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        margin-top: 1rem;
+        font-size: 1rem;
+      }
+      p,
+      li {
+        line-height: 1.5;
+      }
+      ul {
+        margin: 0.45rem 0 0.65rem;
+        padding-left: 1.2rem;
+      }
+      code {
+        background: #f0f4f8;
+        border: 1px solid #d7e0ea;
+        padding: 0.08rem 0.3rem;
+        border-radius: 6px;
+      }
+      a {
+        color: #0f766e;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Tamil Quiz Help</h1>
+      <p>
+        Main quiz screen is intentionally minimal. Use <strong>Settings</strong>
+        for all controls (respect mode, positive/negative mode, TTS fallback,
+        and real voice clip recording/upload).
+      </p>
+
+      <h2>Display Modes</h2>
+      <ul>
+        <li><strong>Standard</strong> is the default UI.</li>
+        <li><strong>Low vision focus mode</strong> can be enabled in Settings -> Display.</li>
+      </ul>
+
+      <h2>Keyboard Shortcuts</h2>
+      <ul>
+        <li><code>1</code> <code>2</code> <code>3</code> <code>4</code>: pick option directly</li>
+        <li><code>↑</code> <code>↓</code> <code>←</code> <code>→</code>: move option focus</li>
+        <li><code>Enter</code>: submit focused option (or next question after answer)</li>
+        <li><code>L</code>: listen audio</li>
+        <li><code>R</code>: reveal answer</li>
+        <li><code>N</code>: next question</li>
+        <li><code>S</code>: open settings drawer</li>
+        <li><code>Esc</code>: close settings drawer</li>
+        <li><code>H</code>: open this help page</li>
+        <li><code>?</code>: toggle in-app shortcut sheet</li>
+        <li><code>D</code>: toggle Standard / Low vision mode</li>
+        <li><code>M</code>: cycle respect mode</li>
+        <li><code>P</code>: cycle phrase polarity mode</li>
+        <li><code>F</code>: cycle fallback audio mode</li>
+      </ul>
+
+      <h2>Settings Drawer Shortcuts</h2>
+      <ul>
+        <li><code>V</code>: start/stop recording for selected phrase</li>
+        <li><code>K</code>: play selected recorded clip</li>
+        <li><code>Cmd/Ctrl + S</code>: save cloud audio settings</li>
+      </ul>
+
+      <h2>Audio Priority</h2>
+      <ul>
+        <li>Real recorded clip (if available)</li>
+        <li>Fallback mode from Settings (Mac Basic or Cloud TTS)</li>
+      </ul>
+
+      <h2>Notes</h2>
+      <ul>
+        <li>Default respect mode is <strong>With respect</strong>.</li>
+        <li>Default display mode is <strong>Standard</strong>.</li>
+        <li>Settings are saved in this browser (local storage).</li>
+        <li>Recorded clips are saved in this browser (IndexedDB).</li>
+      </ul>
+
+      <h2>Change Summary (February 8, 2026)</h2>
+      <ul>
+        <li>Implemented a minimal quiz loop with one English prompt and four Tamil options per round, optimized for fast repetition.</li>
+        <li>Set defaults to <strong>Standard display</strong> and <strong>With Respect</strong> phrasing to match polite usage first.</li>
+        <li>Added filters for <strong>Respect</strong> (with/without/mixed) and <strong>Polarity</strong> (positive/negative/mixed), both available in Settings and via keyboard cycling.</li>
+        <li>Expanded the command bank to 76 command sets (304 generated variants) covering common daily Tamil commands in respectful and casual variants.</li>
+        <li>Improved colloquial romanized forms based on dialect feedback (for example, <em>Kaelu/Kaleh</em> and <em>Nillu/Nileh</em> style cues).</li>
+        <li>Moved non-essential controls out of the main quiz surface into a settings drawer, keeping the quiz area focused and uncluttered.</li>
+        <li>Added low vision focus mode with fullscreen-style layout, larger controls, and reduced chrome while preserving full keyboard operation.</li>
+        <li>Added complete keyboard support: answer selection (<code>1-4</code>, arrows, <code>Enter</code>), quiz actions (<code>B</code>, <code>L</code>, <code>R</code>, <code>N</code>), settings/help (<code>S</code>, <code>Esc</code>, <code>H</code>, <code>?</code>), and mode cycling (<code>D</code>, <code>M</code>, <code>P</code>, <code>F</code>).</li>
+        <li>Added settings-only recording shortcuts: <code>V</code> to start/stop recording and <code>K</code> to play the selected saved clip.</li>
+        <li>Added teacher-recording-mode shortcuts: <code>V</code> record start/stop, <code>X</code> stop, <code>K</code> play, <code>Delete</code> remove clip, and <code>←/→</code> move phrase.</li>
+        <li>Implemented real-audio workflow with local persistence: record/upload/play/delete clips and track coverage status per phrase.</li>
+        <li>Added a dedicated <strong>Teacher recording mode</strong> (UI mode) for fast human-teacher clip capture on the main screen with sequential phrase navigation and clip-state visibility.</li>
+        <li>Implemented fallback speech strategy with two tiers: <strong>Mac Basic TTS</strong> and upgraded <strong>Cloud TTS (OpenAI)</strong>, with real recorded clips always prioritized first.</li>
+        <li>Added reinforcement flow after correct answers: pleasant success tone, phrase playback, then automatic advance to the next question.</li>
+        <li>Added wrong-answer spoken cue in Tamil ("try again") with a slightly negative tone, while keeping retry available.</li>
+        <li>Changed answer feedback behavior to option-pill states only (correct/wrong/reveal), removed the bottom "Answer:" line, and enabled retry after wrong attempts instead of hard-locking immediately.</li>
+        <li>Added quiz <code>Back</code> navigation with <code>B</code> shortcut to return to previously shown questions in the same session.</li>
+        <li>Updated <code>Reveal</code> behavior so each option keeps the same layout and only swaps the bold Tamil segment for bold English, while retaining the number prefix, divider, and romanized Tamil.</li>
+        <li>Added stronger question-level cue for respect and intentionally removed explicit polarity indicator from the quiz header (polarity remains available as a setting).</li>
+        <li>Refined Tamil/romanized layout for zoom use: one-line presentation with explicit separator spacing so scripts do not visually merge.</li>
+        <li>Added separate documentation surfaces (help page + shortcut overlay) so explanations are accessible without cluttering the quiz view.</li>
+        <li>Prepared GitHub deployment with <code>.github/workflows/deploy-pages.yml</code> and <code>.nojekyll</code> for static Pages hosting.</li>
+      </ul>
+
+      <p>
+        Project overview: <a href="README.md" target="_blank" rel="noopener">README.md</a>
+      </p>
+    </main>
+  </body>
+</html>
